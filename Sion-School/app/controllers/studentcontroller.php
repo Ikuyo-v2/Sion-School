@@ -4,9 +4,11 @@ namespace App\Controllers;
 class StudentController 
 {
     
-    public function index()
+
+
+    public function show_siswa_tables()
     {
-        // load database connection and fetch all siswa records
+
         require_once __DIR__ . '/../config/database.php';
         $conn = \App\Config\Database::getConnection();
         $result = $conn->query("SELECT * FROM siswa");
@@ -15,43 +17,34 @@ class StudentController
             $students = $result->fetch_all(MYSQLI_ASSOC);
         }
 
-        // pass data to view
-        require_once __DIR__ . '/../views/siswa/index.php';
+        require_once __DIR__ . '/../views/admin/admin.php';
     }
 
-    public function create()
+    public function add_student()
     {
-        require_once __DIR__ . '/../views/siswa/create.php';
-    }
-
-    public function show($id)
-    {
-
-        require_once __DIR__ . '/../config/database.php';
-        $conn = \App\Config\Database::getConnection();
-        $stmt = $conn->prepare("SELECT * FROM siswa WHERE id = ?");
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $student = $stmt->get_result()->fetch_assoc();
-
-        require_once __DIR__ . '/../views/siswa/show.php';
-    }
-
-    public function show_tables()
-    {
-        require_once __DIR__ . '/../config/database.php';
-        $conn = \App\Config\Database::getConnection();
-        $result = $conn->query("SHOW TABLES");
-        $tables = [];
-        if ($result) {
-            while ($row = $result->fetch_array(MYSQLI_NUM)) {
-                $tables[] = $row[0];
-            }
+        // pastikan request method POST
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /admin/admin');
+            exit;
         }
 
-        require_once __DIR__ . '/../views/siswa/show_tables.php';
-    }
+        require_once __DIR__ . '/../config/database.php';
+        $conn = \App\Config\Database::getConnection();
 
+        $nama = isset($_POST['nama']) ? $conn->real_escape_string(trim($_POST['nama'])) : '';
+        $email = isset($_POST['email']) ? $conn->real_escape_string(trim($_POST['email'])) : '';
+        $kelas = isset($_POST['kelas']) ? $conn->real_escape_string(trim($_POST['kelas'])) : '';
+
+        if ($nama && $email && $kelas) {
+            $stmt = $conn->prepare("INSERT INTO siswa (nama, email, kelas, created_at) VALUES (?, ?, ?, NOW())");
+            $stmt->bind_param('sss', $nama, $email, $kelas);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        header('Location: /admin/admin');
+        exit;
+    }
 
 
 

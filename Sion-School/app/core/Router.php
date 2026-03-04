@@ -39,8 +39,7 @@ class Router
                 $function = $route['function'];
 
                 call_user_func_array([$controller, $function], $matches);
-                // index($parameter1, $parameter2, ...);
-                //ex: call_user_func_array(['StudentController','index'], [1,2]);
+
                 return;
             }
 
