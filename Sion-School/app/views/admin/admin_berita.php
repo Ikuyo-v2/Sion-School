@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Daftar Siswa</title>
+    <title>Admin - Daftar Berita</title>
     <link rel="stylesheet" href="/css/admin.css">
     <style>
         .edit-mode { display: none; }
@@ -13,9 +13,9 @@
     </style>
 </head>
 <body>
-    <h1 class="title">Admin: Daftar Siswa</h1> 
+    <h1 class="title">Admin: Daftar Berita</h1> 
 
-    <?php if (!empty($students)): ?>
+<?php if (!empty($students)): ?>
         <table border="1" cellpadding="10" cellspacing="0">
             <thead>
                 <tr>
@@ -78,10 +78,10 @@
             </tbody>
         </table>
     <?php else: ?>
-        <p>Tidak ada siswa untuk ditampilkan.</p>
+        <p>Tidak ada berita untuk ditampilkan.</p>
     <?php endif; ?>
 
-    <h2>Tambah siswa</h2>
+    <h2>Tambah berita</h2>
     <form action="/admin/add" method="post">
         <table class="min-w-full bg-white border">
             <tbody>
