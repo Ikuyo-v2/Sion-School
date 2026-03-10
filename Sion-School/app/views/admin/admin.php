@@ -24,10 +24,12 @@
 </head>
 <body>
     <h1>Data Siswa</h1>
+    <!-- Tabel Rek -->
     <table class="table" border="1">
         <tr>
             <th>ID</th>
             <th>Nama</th>
+            <th>Email</th>
             <th>Kelas</th>
             <th>Created At</th>
             <th>Action</th>
@@ -36,6 +38,7 @@
         <tr>
             <td><?= $student['id'] ?></td>
             <td><?= $student['nama'] ?></td>
+            <td><?= $student['email'] ?></td>
             <td><?= $student['kelas'] ?></td>
             <td><?= $student['created_at'] ?></td>
             <td>
@@ -45,6 +48,17 @@
             </td>
         </tr>
         <?php endforeach; ?>
+        <tr>
+            <form method="POST" action="/admin/add">
+                <td >ID</td>
+                <td ><input type="text" name="nama" placeholder="Nama"class="input"></td>
+                <td > <input type="text" name="email" placeholder="Email"class="input"></td>
+                <td ><input type="text" name="kelas" placeholder="Kelas"class="input"></td>
+                <td ></td>
+                <td ><button type="submit" class="button">Add</button></td>
+            </form>
+        </tr>
     </table>
+    <!-- /Tabel Rek -->
 </body>
-</html>
+</html

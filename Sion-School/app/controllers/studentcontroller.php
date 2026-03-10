@@ -31,6 +31,26 @@ class StudentController
         }
     }
 
+    public function add_siswa()
+    {
+        require_once __DIR__ . '/../config/database.php';
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'nama' => $_POST['nama'] ?? '',
+                'email' => $_POST['email'] ?? '',
+                'kelas' => $_POST['kelas'] ?? ''
+            ];
+            
+            $result = \App\Config\Database::insert('siswa', $data);
+            
+            if ($result) {
+                header('Location: /admin/admin');
+                exit;
+            }
+        }
+    }
+
     public static function delete($table, $column, $value) {
         $conn = \App\Config\Database::getConnection();
         $query = "DELETE FROM $table WHERE $column = ?";

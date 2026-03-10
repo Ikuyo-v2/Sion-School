@@ -31,4 +31,23 @@ class Database {
         return $result;
     }
 
+    public static function insert($table, $data) {
+        $conn = self::getConnection();
+        $columns = implode(', ', array_keys($data));
+        $placeholders = implode(', ', array_fill(0, count($data), '?'));
+        $query = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+        
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            return false;
+        }
+        
+        $types = str_repeat('s', count($data));
+        $stmt->bind_param($types, ...array_values($data));
+        $result = $stmt->execute();
+        $stmt->close();
+        
+        return $result;
+    }
+
 }
