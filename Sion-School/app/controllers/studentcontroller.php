@@ -4,9 +4,11 @@ namespace App\Controllers;
 class StudentController 
 {
     
-    public function index()
+
+
+    public function show_table_siswa()
     {
-        // load database connection and fetch all siswa records
+
         require_once __DIR__ . '/../config/database.php';
         $conn = \App\Config\Database::getConnection();
         $result = $conn->query("SELECT * FROM siswa");
@@ -15,45 +17,55 @@ class StudentController
             $students = $result->fetch_all(MYSQLI_ASSOC);
         }
 
-        // pass data to view
-        require_once __DIR__ . '/../views/siswa/index.php';
+        require_once __DIR__ . '/../views/admin/admin.php';
     }
 
-    public function create()
-    {
-        require_once __DIR__ . '/../views/siswa/create.php';
-    }
-
-    public function show($id)
-    {
-
-        require_once __DIR__ . '/../config/database.php';
-        $conn = \App\Config\Database::getConnection();
-        $stmt = $conn->prepare("SELECT * FROM siswa WHERE id = ?");
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        $student = $stmt->get_result()->fetch_assoc();
-
-        require_once __DIR__ . '/../views/siswa/show.php';
-    }
-
-    public function show_tables()
+    public function delete_siswa($id)
     {
         require_once __DIR__ . '/../config/database.php';
-        $conn = \App\Config\Database::getConnection();
-        $result = $conn->query("SHOW TABLES");
-        $tables = [];
+        $result = \App\Config\Database::delete('siswa', 'id', $id);
+        
         if ($result) {
-            while ($row = $result->fetch_array(MYSQLI_NUM)) {
-                $tables[] = $row[0];
+            header('Location: /admin/admin');
+            exit;
+        }
+    }
+
+    public function add_siswa()
+    {
+        require_once __DIR__ . '/../config/database.php';
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'nama' => $_POST['nama'] ?? '',
+                'email' => $_POST['email'] ?? '',
+                'kelas' => $_POST['kelas'] ?? ''
+            ];
+            
+            $result = \App\Config\Database::insert('siswa', $data);
+            
+            if ($result) {
+                header('Location: /admin/admin');
+                exit;
             }
         }
-
-        require_once __DIR__ . '/../views/siswa/show_tables.php';
     }
 
-
-
+    public static function delete($table, $column, $value) {
+        $conn = \App\Config\Database::getConnection();
+        $query = "DELETE FROM $table WHERE $column = ?";
+        
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            return false;
+        }
+        
+        $stmt->bind_param("s", $value);
+        $result = $stmt->execute();
+        $stmt->close();
+        
+        return $result;
+    }
 
 }
 ?>

@@ -3,9 +3,9 @@ require_once __DIR__ . '/../app/core/Router.php';
 use App\Core\Router;
 
 $router = new Router();
-$router->add('GET', '/siswa', 'StudentController', 'index');
-$router->add('GET', '/siswa/create', 'StudentController', 'create');
-$router->add('GET', '/siswa/{id}', 'StudentController', 'show');
-$router->add('GET', '/siswa/show_tables', 'StudentController', 'show_tables');
+$router->add('GET', '/admin/admin', 'StudentController', 'show_table_siswa');
+$router->add('GET', '/admin/delete/{id}', 'StudentController', 'delete_siswa');
+$router->add('POST', '/admin/add', 'StudentController', 'add_siswa');
+
 $router->run();
 ?>
