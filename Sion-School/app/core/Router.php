@@ -14,7 +14,8 @@ class Router
             'function' => $function
         ];
     }
-    public function run()
+    
+   public function run()
     {
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -32,31 +33,19 @@ class Router
 
             if (preg_match($pattern, $uri, $matches)) {
                 array_shift($matches); // menghapus elemen pertama yang merupakan full match
-                require_once __DIR__ . '/../controllers/' . $route['controller'] . '.php';
+                require_once '../app/controllers/' . $route['controller'] . '.php';
 
                 $controllerClass = 'App\\Controllers\\' . $route['controller'];
                 $controller = new $controllerClass();
                 $function = $route['function'];
 
                 call_user_func_array([$controller, $function], $matches);
-
+                // index($parameter1, $parameter2, ...);
+                //ex: call_user_func_array(['StudentController','index'], [1,2]);
                 return;
             }
 
         }
-
-        http_response_code(404);
-        echo '<h1>404 Not Found</h1>';
-
-        }
-
-    public function 
-    show(string $id)
-      {
-        echo '<h1>Student Detail</h1>';
-        echo '<p>Menampilkan detail siswa dengan ID: {$id}</p>';
-      }
-
-    }
-
+}
+}
 ?>

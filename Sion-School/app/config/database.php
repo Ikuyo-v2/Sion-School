@@ -14,4 +14,21 @@ class Database {
         }
         return $conn;
     }
+
+    public static function delete($table, $column, $value) {
+        $conn = self::getConnection();
+        $query = "DELETE FROM $table WHERE $column = ?";
+        
+        $stmt = $conn->prepare($query);
+        if (!$stmt) {
+            return false;
+        }
+        
+        $stmt->bind_param("s", $value);
+        $result = $stmt->execute();
+        $stmt->close();
+        
+        return $result;
+    }
+
 }
