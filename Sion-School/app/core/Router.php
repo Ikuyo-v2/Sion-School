@@ -31,7 +31,7 @@ class Router
             $pattern = '#^' . $pattern . '$#';
             // student/([0-9]+)
 
-            if (preg_match($pattern, $uri, $matches)) {
+            if ($method === $route['method'] && preg_match($pattern, $uri, $matches)) {
                 array_shift($matches); // menghapus elemen pertama yang merupakan full match
                 require_once '../app/controllers/' . $route['controller'] . '.php';
 

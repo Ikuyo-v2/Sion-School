@@ -23,7 +23,14 @@
     <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
-    <h1>Data Siswa</h1>
+  <div class="content">
+    <div class="nav">
+        <h1>Data Siswa</h1>
+        <div>
+            <a class="button" href="../events">View Berita</a>
+            <a class="button" href="../contests">View Lomba</a>
+        </div>
+    </div>
     <!-- Tabel Rek -->
     <table class="table" border="1">
         <tr>
@@ -37,28 +44,32 @@
         <?php foreach ($students as $student): ?>
         <tr>
             <td><?= $student['id'] ?></td>
-            <td><?= $student['nama'] ?></td>
+            <td>
+                <a href class="nama" ="/students/show<?= $student['id'] ?>">
+                    <?= $student['nama'] ?>
+            </td>
             <td><?= $student['email'] ?></td>
             <td><?= $student['kelas'] ?></td>
             <td><?= $student['created_at'] ?></td>
             <td>
-                <a href="/admin/delete/<?= $student['id'] ?>" onclick="return confirm('Delete this student?');" style="color: red;">
+                <a href="/students/delete/<?= $student['id'] ?>" onclick="return confirm('Delete this student?');" style="color: red;">
                     Delete
                 </a>
             </td>
         </tr>
         <?php endforeach; ?>
         <tr>
-            <form method="POST" action="/admin/add">
+            <form method="POST" action="/students">
                 <td >ID</td>
                 <td ><input type="text" name="nama" placeholder="Nama"class="input"></td>
                 <td > <input type="text" name="email" placeholder="Email"class="input"></td>
                 <td ><input type="text" name="kelas" placeholder="Kelas"class="input"></td>
                 <td ></td>
-                <td ><button type="submit" class="button">Add</button></td>
+                <td ><button type="submit" class="button">Add</button></td> 
             </form>
         </tr>
     </table>
     <!-- /Tabel Rek -->
+     </div>
 </body>
 </html
