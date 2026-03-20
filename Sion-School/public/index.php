@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../app/core/Router.php';
-use App\Controllers\StudentController;
 use App\Core\Router;
 
 $router = new Router();
@@ -22,6 +21,10 @@ $router->add('GET','/contests/create', 'ContestController', 'create');
 $router->add('GET','/contests/{id}/edit', 'ContestController', 'edit');
 $router->add('GET','/contests/{id}', 'ContestController', 'show');
 $router->add('GET','/contests/delete/{id}', 'ContestController', 'delete');
+
+//actual pages
+$router->add('GET','/home', 'HomeController', 'index');
+
 
 //freakyfunction
 $router->add('POST','/students', 'StudentController', 'store');
