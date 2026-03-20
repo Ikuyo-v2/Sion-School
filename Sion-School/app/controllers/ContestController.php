@@ -27,7 +27,7 @@ class ContestController
         }
     }
 
-    public function store() {
+public function store() {
     require_once __DIR__ . '/../config/database.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -43,7 +43,7 @@ class ContestController
 
         // Handle file upload
         if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = __DIR__ . 'public\images\admin-pages\lomba\uploads';
+            $uploadDir = __DIR__ . '/../../public/images/contests/uploads/';
 
             // Create folder if it doesn't exist
             if (!is_dir($uploadDir)) {
