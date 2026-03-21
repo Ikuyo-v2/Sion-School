@@ -24,6 +24,7 @@ $router->add('GET','/contests/delete/{id}', 'ContestController', 'delete');
 
 //actual pages
 $router->add('GET','/home', 'HomeController', 'index');
+$router->add('GET','/berita', 'BeritaController', 'index');
 
 
 //freakyfunction

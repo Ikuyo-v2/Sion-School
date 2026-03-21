@@ -5,20 +5,20 @@ body {
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
-  justify-content: center; /* centers the content box */
+  justify-content: center; 
   align-items: center;
 }
 
 .content {
   background-color: #fff;
-  width: 60%;        /* adjust to how wide you want the content */
+  width: 60%;        
   min-height: 100vh;
   padding: 32px;
 box-shadow: 0 0 40px rgba(0, 0, 0, 0.65);
 }
 .content-lomba {
   background-color: #fff;
-  width: 130%;        /* adjust to how wide you want the content */
+  width: 130%;        
   min-height: 100vh;
   padding: 32px;
 box-shadow: 0 0 40px rgba(0, 0, 0, 0.65);

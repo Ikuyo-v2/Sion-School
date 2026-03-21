@@ -26,7 +26,7 @@
         <div class="nav-links">
             <a href="#" class="active">Beranda</a>
             <a href="#">Kalender</a>
-            <a href="#">Berita</a>
+            <a href="/../berita">Berita</a>
             <a href="#">Lomba</a>
         </div>
 
