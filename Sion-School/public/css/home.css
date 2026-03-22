@@ -238,7 +238,8 @@ body {
 .cta-section {
     background: linear-gradient(135deg, #1c4ed9, #3b6ff5);
     text-align: center;
-    padding: 64px 32px;
+    padding-top: 64px;
+    padding-bottom: 64px;
     width: 100%;
 }
 

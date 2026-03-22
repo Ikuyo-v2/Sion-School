@@ -1,6 +1,7 @@
 <?php
 namespace App\Config;
 
+
 class Database {
     public static function getConnection() {
         $host = 'localhost';
